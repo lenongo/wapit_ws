@@ -1,0 +1,162 @@
+<?xml version="1.0"?>
+<robot name="tether" xmlns:xacro="http://ros.org/wiki/xacro">
+
+<!-- tether -->
+<xacro:property name="tether_radius" value="0.001" />
+<xacro:property name="tether_length" value="0.01155" />
+<xacro:property name="tether_mass" value="0.05" /> <!-- in kg-->
+<xacro:property name="min_radius" value="0.0001" />
+<xacro:property name="min_length" value="0.0001" />
+<xacro:property name="min_mass" value="0.001" />
+
+
+<xacro:property name="M_PI" value="3.1415926535897931" />
+
+<!--
+<xacro:property name="base_x_origin_to_tether_origin" value="0.060" />
+<xacro:property name="base_y_origin_to_tether_origin" value="0.0" />
+<xacro:property name="base_z_origin_to_tether_origin" value="0.0" /> -->
+
+
+<xacro:macro name="cylinder_inertia" params="m r h">
+<inertia  ixx="${m*(3*r*r+h*h)/12}" ixy = "0" ixz = "0"
+iyy="${m*(3*r*r+h*h)/12}" iyz = "0"
+izz="${m*r*r/2}" />
+</xacro:macro>
+
+<xacro:macro name="tether" params="tethernum parent tether_origin">
+<!--fb : front, back ; lr: left, right -->
+
+<link name="${tethernum}_min_link1">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link1">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+
+
+
+
+
+
+<!--
+<joint name="${tethernum}_joint1" type="continuous">
+    <parent link="${parent}"/>
+    <child link="${tethernum}_base_link"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${tether_origin} 0 0.025" rpy="0 0 0" />
+</joint>
+-->
+
+<!--
+<link name="${tethernum}_min">
+<visual>
+<origin xyz="-0.0000005 0 0.000001" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="0.000001" length="0.000001" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-0.0000005 0 0.000001" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="0.000001" length="0.0000001" />
+</geometry>
+</collision>
+<inertial>
+<mass value="0.0000001" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="0.0000001" r="0.000001" h="0.000001" />
+</inertial>
+</link>
+-->
+
+
+<joint name="${tethernum}_joint1_1" type="continuous">
+    <parent link="${parent}"/>
+    <child link="${tethernum}_min_link1"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${tether_origin} 0 0.025" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+
+<joint name="${tethernum}_joint1_2" type="continuous">
+    <parent link="${tethernum}_min_link1"/>
+    <child link="${tethernum}_base_link1"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+
+
+
+<!-- =========gazebo reference============ -->
+
+<!--
+<gazebo reference="${tethernum}_link1">
+<mu1 value="1.0"/>
+<mu2 value="1.0"/>
+<kp  value="10000000.0" />
+<kd  value="1.0" />
+<fdir1 value="1 0 0"/>
+<material>Gazebo/White</material>
+<turnGravityOff>false</turnGravityOff>
+</gazebo>-->
+
+
+<!-- Transmission is important to link the joints and the controller -->
+<!--
+<transmission name="${fb}_${lr}_wheel_joint_trans">
+<type>transmission_interface/SimpleTransmission</type>
+<joint name="${fb}_${lr}_wheel_joint">
+<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+</joint>
+<actuator name="${fb}_${lr}_wheel_joint_motor">
+<mechanicalReduction>1</mechanicalReduction>
+</actuator>
+</transmission> -->
+
+</xacro:macro>
+</robot>
+

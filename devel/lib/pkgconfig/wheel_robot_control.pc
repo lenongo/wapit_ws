@@ -1,0 +1,8 @@
+prefix=/home/wamot/wapit_ws/devel
+
+Name: wheel_robot_control
+Description: Description of wheel_robot_control
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

@@ -1,0 +1,9 @@
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50
+
+
+  roll_position_controller:
+      type: velocity_controllers/JointVelocityController
+      joint: roll_joint
+      pid: {p: 0.0, i: 0.0, d: 0.0}

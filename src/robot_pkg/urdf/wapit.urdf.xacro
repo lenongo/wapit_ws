@@ -1,0 +1,297 @@
+<?xml version="1.0"?>
+<robot name="wapit" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<!-- Included URDF/XACRO Files -->
+<xacro:include filename="$(find robot_pkg)/urdf/materials.urdf.xacro" />
+<xacro:include filename="$(find robot_pkg)/urdf/wheel.urdf.xacro" />
+<xacro:include filename="$(find robot_pkg)/urdf/square/tetherone.urdf.xacro" />
+<xacro:include filename="$(find robot_pkg)/urdf/roll.urdf.xacro" />
+<xacro:include filename="$(find robot_pkg)/urdf/camera.urdf.xacro" />
+
+
+<!-- PROPERTY LIST -->
+<!--All units in m-kg-s-radians unit system -->
+<xacro:property name="M_PI" value="3.1415926535897931" />
+
+<!-- Main Body-base -->
+<xacro:property name="base_x_size" value="0.28" />
+<xacro:property name="base_y_size" value="0.2" />
+<xacro:property name="base_z_size" value="0.07" />
+<xacro:property name="base_mass" value="3.00" /> <!-- in kg-->
+
+<!--Inertial macros for the box and cylinder. Units are kg*m^2-->
+<xacro:macro name="box_inertia" params="m x y z">
+<inertia  ixx="${m*(y*y+z*z)/12.}" ixy = "0." ixz = "0."
+iyy="${m*(x*x+z*z)/12.}" iyz = "0."
+izz="${m*(x*x+z*z)/12.}" />
+</xacro:macro>
+
+<!-- BASE-FOOTPRINT -->
+<!-- base_footprint is a fictitious link(frame) that is on the ground right below base_link origin -->
+<link name="base_footprint"/>
+
+<gazebo reference="base_footprint">
+<turnGravityOff>false</turnGravityOff>
+</gazebo>
+
+<joint name="base_link_joint" type="fixed">
+<origin xyz="0 0 ${wheel_radius - base_z_origin_to_wheel_origin}" rpy="0 0 0" />
+<parent link="base_footprint"/>
+<child link="base_link" />
+</joint>
+
+<!-- BASE-LINK -->
+<!--Actual body/chassis of the robot-->
+<link name="base_link">
+<inertial>
+<mass value="${base_mass}" />
+<origin xyz="0 0 0" />
+<!--The 3x3 rotational inertia matrix. -->
+<box_inertia  m="${base_mass}" x="${base_x_size}" y="${base_y_size}" z="${base_z_size}"/>
+</inertial>
+<visual>
+<origin xyz="0 0 0" rpy="0 0 0" />
+<geometry>
+<mesh filename="package://robot_pkg/dae/mentoribody.dae"/>
+<!--<box size="${base_x_size} ${base_y_size} ${base_z_size}"/>-->
+</geometry>
+<material name="White" />
+</visual>
+<collision>
+<origin xyz="0 0 0" rpy="0 0 0 " />
+<geometry>
+<mesh filename="package://robot_pkg/dae/mentoribody.dae"/>
+<!--<box size="${base_x_size} ${base_y_size} ${base_z_size}"/>-->
+</geometry>
+</collision>
+</link>
+<gazebo reference="base_link">
+<material>Gazebo/White</material>
+<turnGravityOff>false</turnGravityOff>
+<selfCollide>true</selfCollide>
+</gazebo>
+
+<!-- WHEELs ==translateX:,translateY:wheeljoint==-->
+<wheel fb="front" lr="right" parent="base_link" translateX="1" translateY="-1" flipY="1"/>
+<wheel fb="front" lr="left" parent="base_link" translateX="1" translateY="1" flipY="-1"/>
+<!--<wheel fb="back" lr="right" parent="base_link" translateX="-1" translateY="-1" flipY="-1"/>
+<wheel fb="back" lr="left" parent="base_link" translateX="-1" translateY="1" flipY="-1"/>-->
+
+<!-- tether is here
+<tether tethernum="1" parent="base_link" tether_origin="-0.06"/>
+-->
+
+<tether tethernum="1" parent="roll_link" tether_origin="-0.08"/>
+
+<roll parent="base_link"/>
+
+<camera_macro parent="base_link"/>
+
+<!--
+<xacro:include filename="$(find wamot)/urdf/kinect.urdf.xacro" />
+<xacro:include filename="$(find wamot)/urdf/imu.urdf.xacro" />
+-->
+
+<!--<xacro:include filename="$(find velodyne_description)/urdf/VLP-16.urdf.xacro"/>
+  <VLP-16 parent="base_link" name="velodyne" topic="/velodyne_points">
+    <origin xyz="0 0 0.3" rpy="0 0 0" />
+  </VLP-16>-->
+
+<!--<xacro:include filename="$(find wamot)/urdf/sweep.urdf.xacro"/>
+  <sweep parent="base_link" name="sweep_l" topic="sweep_l/pts2">
+    <origin xyz="0.18 -0.075 0.07" rpy="${M_PI/2} 0 0" />
+  </sweep>
+  <sweep parent="base_link" name="sweep_r" topic="sweep_r/pts2">
+    <origin xyz="0.18 0.075 0.07" rpy="${-M_PI/2} 0 0" />
+  </sweep>-->
+
+<!--
+<xacro:include filename="$(find wamot)/urdf/hokuyo.urdf.xacro"/>
+  <hokuyo parent="base_link" name="hokuyo_link" topic="/hokuyo/scan">
+   <origin xyz="0 0 0.15" rpy="0 0 0" />
+  </hokuyo>
+-->
+
+<!--<xacro:include filename="$(find wamot)/urdf/lite_v3.urdf.xacro"/>
+  <lite_v3 parent="base_link" name="lite_v3_link" topic="lite_v3/scan">
+   <origin xyz="0.1 0 0.10" rpy="0 0 0" />
+  </lite_v3>
+
+
+  <hokuyo parent="base_link" name="hokuyo_l" topic="hokuyo_l/scan">
+   <origin xyz="0.18 -0.075 0.06" rpy="${M_PI/2} 0 0" />
+  </hokuyo>
+
+  <hokuyo parent="base_link" name="hokuyo_r" topic="hokuyo_r/scan">
+   <origin xyz="0.18 0.075 0.06" rpy="${-M_PI/2} 0 0" />
+  </hokuyo>
+-->
+<!--<xacro:include filename="$(find wamot)/urdf/bumblebee2.urdf.xacro" />
+  <BB2-08S2C-38 frame="bumblebee2" name="bumblebee2" />
+
+  <joint name="camera_joint" type="fixed">
+    <origin xyz="0.2 0 0" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="bumblebee2" />
+  </joint>-->
+<!--koko
+  <gazebo>
+    <plugin name="wapit_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
+      <alwaysOn>true</alwaysOn>
+      <updateRate>100.0</updateRate>
+      <leftFrontJoint>front_left_wheel_joint</leftFrontJoint>
+      <rightFrontJoint>front_right_wheel_joint</rightFrontJoint>
+      <wheelSeparation>${base_y_size}</wheelSeparation>
+      <wheelDiameter>${2*wheel_radius}</wheelDiameter>
+      <torque>35</torque>
+      <broadcastTF>1</broadcastTF>
+      <odometryFrame>map</odometryFrame>
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryTopic>odom</odometryTopic>
+      <robotBaseFrame>base_footprint</robotBaseFrame>
+    </plugin>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+	<robotNamespace>/wapit</robotNamespace>
+    </plugin>
+
+koko-->
+
+<gazebo>
+
+    <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
+      <legacyMode>false</legacyMode>
+      <rosDebugLevel>Debug</rosDebugLevel>
+      <publishWheelTF>false</publishWheelTF>
+      <robotNamespace>/</robotNamespace>
+      <publishTf>1</publishTf>
+      <publishWheelJointState>true</publishWheelJointState>
+      <alwaysOn>true</alwaysOn>
+      <updateRate>100.0</updateRate>
+      <leftJoint>front_left_wheel_joint</leftJoint>
+      <rightJoint>front_right_wheel_joint</rightJoint>
+      <wheelSeparation>${2*base_y_size}</wheelSeparation>
+      <wheelDiameter>${2*wheel_radius}</wheelDiameter>
+      <broadcastTF>1</broadcastTF>
+      <wheelTorque>50</wheelTorque>
+      <wheelAcceleration>1.0</wheelAcceleration>
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryFrame>odom</odometryFrame> 
+      <odometryTopic>odom</odometryTopic> 
+      <robotBaseFrame>base_footprint</robotBaseFrame>
+    </plugin>
+
+
+<!--
+<plugin name="wamot_drive_controller" filename="libgazebo_ros_wamot_drive.so">
+    <updateRate>100.0</updateRate>
+    <leftFrontJoint>front_left_wheel_joint</leftFrontJoint>
+    <rightFrontJoint>front_right_wheel_joint</rightFrontJoint>-->
+    <!--<leftRearJoint>back_left_wheel_joint</leftRearJoint>
+    <rightRearJoint>back_right_wheel_joint</rightRearJoint>-->
+<!--    <wheelSeparation>${base_y_size+0.01}</wheelSeparation>
+    <wheelDiameter>${2*wheel_radius}</wheelDiameter>
+    <wheelTorque>50</wheelTorque>--> <!--recommend over 50 torque to rotate-->
+ <!--   <publishOdomTF>true</publishOdomTF>
+    <publishTf>1</publishTf>
+    <publishWheelTF>false</publishWheelTF>
+    <wheelAcceleration>0</wheelAcceleration>
+    <commandTopic>cmd_vel</commandTopic>
+    <odometryTopic>odom</odometryTopic>
+    <odometryFrame>/odom</odometryFrame>
+    <odometrySource>encoder</odometrySource>
+    <robotBaseFrame>/base_footprint</robotBaseFrame>
+    <publishWheelJointState>true</publishWheelJointState>
+     <legacyMode>false</legacyMode>
+     <robotNamespace>wapit</robotNamespace>-->
+     <!--<rosDebugLevel>Debug</rosDebugLevel>-->
+<!--</plugin>-->
+   
+
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+        <legacyModeNS>true</legacyModeNS>
+    </plugin>
+<!--
+
+  <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive2.so">
+    <alwaysOn>true</alwaysOn>
+    <updateRate>100.0</updateRate>
+    <leftFrontJoint>front_left_wheel_joint</leftFrontJoint>
+    <rightFrontJoint>front_right_wheel_joint</rightFrontJoint>
+    <leftRearJoint>back_left_wheel_joint</leftRearJoint>
+    <rightRearJoint>back_right_wheel_joint</rightRearJoint>
+    <wheelSeparation>${base_y_size+0.01}</wheelSeparation>
+    <wheelDiameter>${2*wheel_radius}</wheelDiameter>
+    <torque>50</torque>
+    <broadcastTF>1</broadcastTF>
+    <odometryFrame>odom</odometryFrame>
+    <commandTopic>cmd_vel</commandTopic>
+    <odometryTopic>odom</odometryTopic>
+    <robotBaseFrame>base_footprint</robotBaseFrame>
+    <robotNamespace>wamot</robotNamespace>
+    <covariance_x>0.000100</covariance_x>
+    <covariance_y>0.000100</covariance_y>
+    <covariance_yaw>0.0010000</covariance_yaw>
+</plugin>
+
+<plugin name="gps_controller" filename="libhector_gazebo_ros_gps.so">
+    <robotNamespace>wamot</robotNamespace>
+    <updateRate>40</updateRate>
+    <bodyName>base_link</bodyName>
+    <frameId>base_link</frameId>
+    <topicName>navsat/fix</topicName>
+    <velocityTopicName>navsat/vel</velocityTopicName>
+    <referenceLatitude>49.9</referenceLatitude>
+    <referenceLongitude>8.9</referenceLongitude>
+    <referenceHeading>0</referenceHeading>
+    <referenceAltitude>0</referenceAltitude>
+    <drift>0.0001 0.0001 0.0001</drift>
+</plugin>
+
+ <plugin name="wamot_drive_controller" filename="libgazebo_ros_diff_drive.so">
+       <alwaysOn>true</alwaysOn>
+        <updateRate>100.0</updateRate>
+        <leftJoint>front_left_wheel_joint back_left_wheel_joint</leftJoint>
+        <rightJoint>front_right_wheel_joint back_right_wheel_joint</rightJoint>
+        <wheelSeparation>${base_y_size+0.01}</wheelSeparation>
+        <wheelDiameter>${2*wheel_radius}</wheelDiameter>
+        <publishOdomTF>true</publishOdomTF>
+        <publishWheelTF>true</publishWheelTF>
+        <wheelAcceleration>0</wheelAcceleration>
+        <wheelTorque>20</wheelTorque>
+        <commandTopic>/cmd_vel</commandTopic>
+        <odometryTopic>odom</odometryTopic>
+        <odometryFrame>odom</odometryFrame>
+        <odometrySource>1</odometrySource>
+        <robotBaseFrame>base_footprint</robotBaseFrame>
+        <publishWheelJointState>true</publishWheelJointState>
+         <legacyMode>false</legacyMode>
+        <robotNamespace>wamot</robotNamespace>
+   </plugin>-->
+
+   <!--<plugin name="mimic_left_joint_plugin" filename="libroboticsgroup_gazebo_mimic_joint_plugin.so">
+     <joint>back_left_wheel_joint</joint>
+     <mimicJoint>front_left_wheel_joint</mimicJoint>
+     <hasPID>1</hasPID>
+   </plugin>
+
+   <plugin name="mimic_right_joint_plugin" filename="libroboticsgroup_gazebo_mimic_joint_plugin.so">
+     <joint>back_right_wheel_joint</joint>
+     <mimicJoint>front_right_wheel_joint</mimicJoint>
+     <hasPID>1</hasPID>
+   </plugin>-->
+
+
+
+    <plugin name="ground_truth" filename="libgazebo_ros_p3d.so">
+      <frameName>world</frameName>
+      <bodyName>base_footprint</bodyName>
+      <topicName>/tracker</topicName>
+      <updateRate>2.0</updateRate>
+    </plugin>
+
+
+
+</gazebo>
+
+</robot>
+

@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+
+<robot name="camera" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:macro name="camera_macro" params="parent">
+
+
+    <joint name="camerabody_joint" type="fixed">
+      <parent link="${parent}"/>
+      <child  link="camerabody_link"/>
+      <origin xyz="-0.1 0.1 0.035" rpy="0 0 0"/>
+    </joint>
+
+
+    <joint name="camera_joint" type="fixed">
+      <parent link="${parent}"/>
+      <child  link="camera_link"/>
+      <origin xyz="-0.09 0.115 0.035" rpy="${radians(-120)} 0 0"/>
+    </joint>
+
+
+    <link name="camerabody_link">
+    <visual>
+    <origin xyz="0 0 0.01" rpy="0 0 0" />
+    <geometry>
+    <box size="0.03 0.03 0.02"/>
+    </geometry>
+    <material name="Blue" />
+    </visual>
+    <collision>
+    <origin xyz="0 0 0.01" rpy="0 0 0" />
+    <geometry>
+    <box size="0.03 0.03 0.02"/>
+    </geometry>
+    </collision>
+    <inertial>
+    <mass value="0.0001" />
+    <origin xyz="0 0 0" />
+    <box_inertia  m="0.0001" x="0.03" y="0.03" z="0.02"/>
+    </inertial>
+    </link>
+
+    
+
+    <link name="camera_link"/>
+    <gazebo reference="camera_link">
+      <sensor type="camera" name="camera">
+        <update_rate>30.0</update_rate>
+        <camera name="camera">
+          <pose>0 0 0 0 ${radians(-90)} ${radians(90)}</pose>
+          <horizontal_fov>1.3962634</horizontal_fov>
+          <image>
+            <width>800</width>
+            <height>600</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.02</near>
+            <far>300</far>
+          </clip>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.0</stddev>
+          </noise>
+        </camera>
+        <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+          <alwaysOn>true</alwaysOn>
+          <updateRate>0.0</updateRate>
+          <cameraName>camera</cameraName>
+          <imageTopicName>image_raw</imageTopicName>
+          <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+          <frameName>camera_link</frameName>
+          <hackBaseline>0.0</hackBaseline>
+          <distortionK1>0.0</distortionK1>
+          <distortionK2>0.0</distortionK2>
+          <distortionK3>0.0</distortionK3>
+          <distortionT1>0.0</distortionT1>
+          <distortionT2>0.0</distortionT2>
+        </plugin>
+      </sensor>
+    </gazebo>
+  </xacro:macro> 
+
+    <gazebo reference="camerabody_link">
+    <material>Gazebo/Blue</material>
+    </gazebo>
+
+
+    <plugin name="ground_truth" filename="libgazebo_ros_p3d.so">
+      <frameName>world</frameName>
+      <bodyName>camera_link</bodyName>
+      <topicName>/tracker</topicName>
+      <updateRate>2.0</updateRate>
+    </plugin>
+
+
+
+</robot>
+
+

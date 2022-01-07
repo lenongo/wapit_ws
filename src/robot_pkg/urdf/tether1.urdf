@@ -1,0 +1,6130 @@
+<?xml version="1.0"?>
+<robot name="tether" xmlns:xacro="http://ros.org/wiki/xacro">
+
+<!-- tether -->
+<xacro:property name="tether_radius" value="0.001" />
+<xacro:property name="tether_length" value="0.01155" />
+<xacro:property name="tether_mass" value="0.05" /> <!-- in kg-->
+<xacro:property name="min_radius" value="0.0001" />
+<xacro:property name="min_length" value="0.0001" />
+<xacro:property name="min_mass" value="0.001" />
+
+
+<xacro:property name="M_PI" value="3.1415926535897931" />
+
+<!--
+<xacro:property name="base_x_origin_to_tether_origin" value="0.060" />
+<xacro:property name="base_y_origin_to_tether_origin" value="0.0" />
+<xacro:property name="base_z_origin_to_tether_origin" value="0.0" /> -->
+
+
+<xacro:macro name="cylinder_inertia" params="m r h">
+<inertia  ixx="${m*(3*r*r+h*h)/12}" ixy = "0" ixz = "0"
+iyy="${m*(3*r*r+h*h)/12}" iyz = "0"
+izz="${m*r*r/2}" />
+</xacro:macro>
+
+<xacro:macro name="tether" params="tethernum parent tether_origin">
+<!--fb : front, back ; lr: left, right -->
+
+<!--
+
+<link name="${tethernum}_min_link1">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+-->
+
+<link name="${tethernum}_base_link1">
+<visual>
+<origin xyz="-${tether_length/4} 0 ${tether_radius}" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length/2}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/4} 0 ${tether_radius}" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length/2}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length/2}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link2">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link2">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link3">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link3">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link4">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link4">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link5">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link5">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link6">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link6">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link7">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link7">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link8">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link8">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link9">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link9">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link10">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link10">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link11">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link11">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link12">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link12">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link13">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link13">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link14">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link14">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link15">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link15">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link16">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link16">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link17">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link17">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link18">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link18">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link19">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link19">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link20">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link20">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link21">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link21">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link22">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link22">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link23">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link23">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link24">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link24">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link25">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link25">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link26">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link26">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link27">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link27">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link28">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link28">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link29">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link29">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link30">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link30">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link31">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link31">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link32">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link32">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link33">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link33">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link34">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link34">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link35">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link35">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link36">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link36">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link37">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link37">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link38">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link38">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link39">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link39">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link40">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link40">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link41">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link41">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link42">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link42">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link43">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link43">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link44">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link44">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link45">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link45">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link46">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link46">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link47">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link47">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link48">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link48">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link49">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link49">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link50">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link50">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link51">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link51">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link52">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link52">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link53">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link53">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link54">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link54">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link55">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link55">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link56">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link56">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link57">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link57">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link58">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link58">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link59">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link59">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link60">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link60">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link61">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link61">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link62">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link62">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link63">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link63">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link64">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link64">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link65">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link65">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link66">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link66">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link67">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link67">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link68">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link68">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link69">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link69">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link70">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link70">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link71">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link71">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link72">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link72">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link73">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link73">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link74">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link74">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link75">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link75">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link76">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link76">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link77">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link77">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link78">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link78">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link79">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link79">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link80">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link80">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link81">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link81">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link82">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link82">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link83">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link83">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link84">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link84">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link85">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link85">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link86">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link86">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link87">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link87">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link88">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link88">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link89">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link89">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link90">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link90">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link91">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link91">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link92">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link92">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link93">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link93">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link94">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link94">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link95">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link95">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link96">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link96">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link97">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link97">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link98">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link98">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link99">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link99">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+<link name="${tethernum}_min_link100">
+<visual>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${min_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${min_radius}" length="${min_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${min_mass}" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="${min_mass}" r="${min_radius}" h="${min_length}" />
+</inertial>
+</link>
+
+<link name="${tethernum}_base_link100">
+<visual>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-${tether_length/2} 0 0" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="${tether_radius}" length="${tether_length}" />
+</geometry>
+</collision>
+<inertial>
+<mass value="${tether_mass}" />
+<origin xyz="-0.005 0 0" />
+<cylinder_inertia  m="${tether_mass}" r="${tether_radius}" h="${tether_length}" />
+</inertial>
+</link>
+
+
+
+
+
+
+
+
+<!--
+<joint name="${tethernum}_joint1" type="continuous">
+    <parent link="${parent}"/>
+    <child link="${tethernum}_base_link"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${tether_origin} 0 0.025" rpy="0 0 0" />
+</joint>
+-->
+
+<!--
+<link name="${tethernum}_min">
+<visual>
+<origin xyz="-0.0000005 0 0.000001" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="0.000001" length="0.000001" />
+</geometry>
+<material name="DarkGray" />
+</visual>
+<collision>
+<origin xyz="-0.0000005 0 0.000001" rpy="0 ${M_PI/2} 0" />
+<geometry>
+<cylinder radius="0.000001" length="0.0000001" />
+</geometry>
+</collision>
+<inertial>
+<mass value="0.0000001" />
+<origin xyz="0 0 0" />
+<cylinder_inertia  m="0.0000001" r="0.000001" h="0.000001" />
+</inertial>
+</link>
+-->
+
+<!--
+
+<joint name="${tethernum}_joint1_1" type="continuous">
+    <parent link="${parent}"/>
+    <child link="${tethernum}_min_link1"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${tether_origin} 0 0.025" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+-->
+
+<joint name="${tethernum}_joint1_2" type="fixed">
+    <parent link="${parent}"/>
+    <child link="${tethernum}_base_link1"/>
+    <axis xyz="0 0 0" />
+    <origin xyz="0 0.06 0.01" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint2_1" type="revolute">
+    <parent link="${tethernum}_base_link1"/>
+    <child link="${tethernum}_min_link2"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length/2} 0 ${tether_radius}" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+    <limit lower="-0.1" upper="0.1" effort="30" velocity="3"/>
+</joint>
+
+
+<transmission name="tether_joint_trans">
+<type>transmission_interface/SimpleTransmission</type>
+<joint name="${tethernum}_joint2_1">
+<hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+</joint>
+</transmission>
+
+
+<joint name="${tethernum}_joint2_2" type="revolute">
+    <parent link="${tethernum}_min_link2"/>
+    <child link="${tethernum}_base_link2"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+    <limit lower="-0.1" upper="0.1" effort="30" velocity="3"/>
+</joint>
+
+
+<transmission name="tether_joint_trans2">
+<type>transmission_interface/SimpleTransmission</type>
+<joint name="${tethernum}_joint2_2">
+<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+</joint>
+</transmission>
+
+
+<joint name="${tethernum}_joint3_1" type="revolute">
+    <parent link="${tethernum}_base_link2"/>
+    <child link="${tethernum}_min_link3"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+    <limit lower="-0.1" upper="0.1" effort="30" velocity="3"/>
+</joint>
+
+<joint name="${tethernum}_joint3_2" type="revolute">
+    <parent link="${tethernum}_min_link3"/>
+    <child link="${tethernum}_base_link3"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+    <limit lower="-0.1" upper="0.1" effort="0" velocity="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint4_1" type="continuous">
+    <parent link="${tethernum}_base_link3"/>
+    <child link="${tethernum}_min_link4"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint4_2" type="revolute">
+    <parent link="${tethernum}_min_link4"/>
+    <child link="${tethernum}_base_link4"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+    <limit lower="-${60/180*M_PI}" upper="${60/180*M_PI}" effort="0" velocity="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint5_1" type="continuous">
+    <parent link="${tethernum}_base_link4"/>
+    <child link="${tethernum}_min_link5"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint5_2" type="revolute">
+    <parent link="${tethernum}_min_link5"/>
+    <child link="${tethernum}_base_link5"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+    <limit lower="-${60/180*M_PI}" upper="${60/180*M_PI}" effort="0" velocity="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint6_1" type="continuous">
+    <parent link="${tethernum}_base_link5"/>
+    <child link="${tethernum}_min_link6"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint6_2" type="continuous">
+    <parent link="${tethernum}_min_link6"/>
+    <child link="${tethernum}_base_link6"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint7_1" type="continuous">
+    <parent link="${tethernum}_base_link6"/>
+    <child link="${tethernum}_min_link7"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint7_2" type="continuous">
+    <parent link="${tethernum}_min_link7"/>
+    <child link="${tethernum}_base_link7"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint8_1" type="continuous">
+    <parent link="${tethernum}_base_link7"/>
+    <child link="${tethernum}_min_link8"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint8_2" type="continuous">
+    <parent link="${tethernum}_min_link8"/>
+    <child link="${tethernum}_base_link8"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint9_1" type="continuous">
+    <parent link="${tethernum}_base_link8"/>
+    <child link="${tethernum}_min_link9"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint9_2" type="continuous">
+    <parent link="${tethernum}_min_link9"/>
+    <child link="${tethernum}_base_link9"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint10_1" type="continuous">
+    <parent link="${tethernum}_base_link9"/>
+    <child link="${tethernum}_min_link10"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint10_2" type="continuous">
+    <parent link="${tethernum}_min_link10"/>
+    <child link="${tethernum}_base_link10"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint11_1" type="continuous">
+    <parent link="${tethernum}_base_link10"/>
+    <child link="${tethernum}_min_link11"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint11_2" type="continuous">
+    <parent link="${tethernum}_min_link11"/>
+    <child link="${tethernum}_base_link11"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint12_1" type="continuous">
+    <parent link="${tethernum}_base_link11"/>
+    <child link="${tethernum}_min_link12"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint12_2" type="continuous">
+    <parent link="${tethernum}_min_link12"/>
+    <child link="${tethernum}_base_link12"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint13_1" type="continuous">
+    <parent link="${tethernum}_base_link12"/>
+    <child link="${tethernum}_min_link13"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint13_2" type="continuous">
+    <parent link="${tethernum}_min_link13"/>
+    <child link="${tethernum}_base_link13"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint14_1" type="continuous">
+    <parent link="${tethernum}_base_link13"/>
+    <child link="${tethernum}_min_link14"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint14_2" type="continuous">
+    <parent link="${tethernum}_min_link14"/>
+    <child link="${tethernum}_base_link14"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint15_1" type="continuous">
+    <parent link="${tethernum}_base_link14"/>
+    <child link="${tethernum}_min_link15"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint15_2" type="continuous">
+    <parent link="${tethernum}_min_link15"/>
+    <child link="${tethernum}_base_link15"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint16_1" type="continuous">
+    <parent link="${tethernum}_base_link15"/>
+    <child link="${tethernum}_min_link16"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint16_2" type="continuous">
+    <parent link="${tethernum}_min_link16"/>
+    <child link="${tethernum}_base_link16"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint17_1" type="continuous">
+    <parent link="${tethernum}_base_link16"/>
+    <child link="${tethernum}_min_link17"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint17_2" type="continuous">
+    <parent link="${tethernum}_min_link17"/>
+    <child link="${tethernum}_base_link17"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint18_1" type="continuous">
+    <parent link="${tethernum}_base_link17"/>
+    <child link="${tethernum}_min_link18"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint18_2" type="continuous">
+    <parent link="${tethernum}_min_link18"/>
+    <child link="${tethernum}_base_link18"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint19_1" type="continuous">
+    <parent link="${tethernum}_base_link18"/>
+    <child link="${tethernum}_min_link19"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint19_2" type="continuous">
+    <parent link="${tethernum}_min_link19"/>
+    <child link="${tethernum}_base_link19"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint20_1" type="continuous">
+    <parent link="${tethernum}_base_link19"/>
+    <child link="${tethernum}_min_link20"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint20_2" type="continuous">
+    <parent link="${tethernum}_min_link20"/>
+    <child link="${tethernum}_base_link20"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint21_1" type="continuous">
+    <parent link="${tethernum}_base_link20"/>
+    <child link="${tethernum}_min_link21"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint21_2" type="continuous">
+    <parent link="${tethernum}_min_link21"/>
+    <child link="${tethernum}_base_link21"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint22_1" type="continuous">
+    <parent link="${tethernum}_base_link21"/>
+    <child link="${tethernum}_min_link22"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint22_2" type="continuous">
+    <parent link="${tethernum}_min_link22"/>
+    <child link="${tethernum}_base_link22"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint23_1" type="continuous">
+    <parent link="${tethernum}_base_link22"/>
+    <child link="${tethernum}_min_link23"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint23_2" type="continuous">
+    <parent link="${tethernum}_min_link23"/>
+    <child link="${tethernum}_base_link23"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint24_1" type="continuous">
+    <parent link="${tethernum}_base_link23"/>
+    <child link="${tethernum}_min_link24"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint24_2" type="continuous">
+    <parent link="${tethernum}_min_link24"/>
+    <child link="${tethernum}_base_link24"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint25_1" type="continuous">
+    <parent link="${tethernum}_base_link24"/>
+    <child link="${tethernum}_min_link25"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint25_2" type="continuous">
+    <parent link="${tethernum}_min_link25"/>
+    <child link="${tethernum}_base_link25"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint26_1" type="continuous">
+    <parent link="${tethernum}_base_link25"/>
+    <child link="${tethernum}_min_link26"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint26_2" type="continuous">
+    <parent link="${tethernum}_min_link26"/>
+    <child link="${tethernum}_base_link26"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint27_1" type="continuous">
+    <parent link="${tethernum}_base_link26"/>
+    <child link="${tethernum}_min_link27"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint27_2" type="continuous">
+    <parent link="${tethernum}_min_link27"/>
+    <child link="${tethernum}_base_link27"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint28_1" type="continuous">
+    <parent link="${tethernum}_base_link27"/>
+    <child link="${tethernum}_min_link28"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint28_2" type="continuous">
+    <parent link="${tethernum}_min_link28"/>
+    <child link="${tethernum}_base_link28"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint29_1" type="continuous">
+    <parent link="${tethernum}_base_link28"/>
+    <child link="${tethernum}_min_link29"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint29_2" type="continuous">
+    <parent link="${tethernum}_min_link29"/>
+    <child link="${tethernum}_base_link29"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint30_1" type="continuous">
+    <parent link="${tethernum}_base_link29"/>
+    <child link="${tethernum}_min_link30"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint30_2" type="continuous">
+    <parent link="${tethernum}_min_link30"/>
+    <child link="${tethernum}_base_link30"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint31_1" type="continuous">
+    <parent link="${tethernum}_base_link30"/>
+    <child link="${tethernum}_min_link31"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint31_2" type="continuous">
+    <parent link="${tethernum}_min_link31"/>
+    <child link="${tethernum}_base_link31"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint32_1" type="continuous">
+    <parent link="${tethernum}_base_link31"/>
+    <child link="${tethernum}_min_link32"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint32_2" type="continuous">
+    <parent link="${tethernum}_min_link32"/>
+    <child link="${tethernum}_base_link32"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint33_1" type="continuous">
+    <parent link="${tethernum}_base_link32"/>
+    <child link="${tethernum}_min_link33"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint33_2" type="continuous">
+    <parent link="${tethernum}_min_link33"/>
+    <child link="${tethernum}_base_link33"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint34_1" type="continuous">
+    <parent link="${tethernum}_base_link33"/>
+    <child link="${tethernum}_min_link34"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint34_2" type="continuous">
+    <parent link="${tethernum}_min_link34"/>
+    <child link="${tethernum}_base_link34"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint35_1" type="continuous">
+    <parent link="${tethernum}_base_link34"/>
+    <child link="${tethernum}_min_link35"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint35_2" type="continuous">
+    <parent link="${tethernum}_min_link35"/>
+    <child link="${tethernum}_base_link35"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint36_1" type="continuous">
+    <parent link="${tethernum}_base_link35"/>
+    <child link="${tethernum}_min_link36"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint36_2" type="continuous">
+    <parent link="${tethernum}_min_link36"/>
+    <child link="${tethernum}_base_link36"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint37_1" type="continuous">
+    <parent link="${tethernum}_base_link36"/>
+    <child link="${tethernum}_min_link37"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint37_2" type="continuous">
+    <parent link="${tethernum}_min_link37"/>
+    <child link="${tethernum}_base_link37"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint38_1" type="continuous">
+    <parent link="${tethernum}_base_link37"/>
+    <child link="${tethernum}_min_link38"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint38_2" type="continuous">
+    <parent link="${tethernum}_min_link38"/>
+    <child link="${tethernum}_base_link38"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint39_1" type="continuous">
+    <parent link="${tethernum}_base_link38"/>
+    <child link="${tethernum}_min_link39"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint39_2" type="continuous">
+    <parent link="${tethernum}_min_link39"/>
+    <child link="${tethernum}_base_link39"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint40_1" type="continuous">
+    <parent link="${tethernum}_base_link39"/>
+    <child link="${tethernum}_min_link40"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint40_2" type="continuous">
+    <parent link="${tethernum}_min_link40"/>
+    <child link="${tethernum}_base_link40"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint41_1" type="continuous">
+    <parent link="${tethernum}_base_link40"/>
+    <child link="${tethernum}_min_link41"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint41_2" type="continuous">
+    <parent link="${tethernum}_min_link41"/>
+    <child link="${tethernum}_base_link41"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint42_1" type="continuous">
+    <parent link="${tethernum}_base_link41"/>
+    <child link="${tethernum}_min_link42"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint42_2" type="continuous">
+    <parent link="${tethernum}_min_link42"/>
+    <child link="${tethernum}_base_link42"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint43_1" type="continuous">
+    <parent link="${tethernum}_base_link42"/>
+    <child link="${tethernum}_min_link43"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint43_2" type="continuous">
+    <parent link="${tethernum}_min_link43"/>
+    <child link="${tethernum}_base_link43"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint44_1" type="continuous">
+    <parent link="${tethernum}_base_link43"/>
+    <child link="${tethernum}_min_link44"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint44_2" type="continuous">
+    <parent link="${tethernum}_min_link44"/>
+    <child link="${tethernum}_base_link44"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint45_1" type="continuous">
+    <parent link="${tethernum}_base_link44"/>
+    <child link="${tethernum}_min_link45"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint45_2" type="continuous">
+    <parent link="${tethernum}_min_link45"/>
+    <child link="${tethernum}_base_link45"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint46_1" type="continuous">
+    <parent link="${tethernum}_base_link45"/>
+    <child link="${tethernum}_min_link46"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint46_2" type="continuous">
+    <parent link="${tethernum}_min_link46"/>
+    <child link="${tethernum}_base_link46"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint47_1" type="continuous">
+    <parent link="${tethernum}_base_link46"/>
+    <child link="${tethernum}_min_link47"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint47_2" type="continuous">
+    <parent link="${tethernum}_min_link47"/>
+    <child link="${tethernum}_base_link47"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint48_1" type="continuous">
+    <parent link="${tethernum}_base_link47"/>
+    <child link="${tethernum}_min_link48"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint48_2" type="continuous">
+    <parent link="${tethernum}_min_link48"/>
+    <child link="${tethernum}_base_link48"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint49_1" type="continuous">
+    <parent link="${tethernum}_base_link48"/>
+    <child link="${tethernum}_min_link49"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint49_2" type="continuous">
+    <parent link="${tethernum}_min_link49"/>
+    <child link="${tethernum}_base_link49"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint50_1" type="continuous">
+    <parent link="${tethernum}_base_link49"/>
+    <child link="${tethernum}_min_link50"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint50_2" type="continuous">
+    <parent link="${tethernum}_min_link50"/>
+    <child link="${tethernum}_base_link50"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint51_1" type="continuous">
+    <parent link="${tethernum}_base_link50"/>
+    <child link="${tethernum}_min_link51"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint51_2" type="continuous">
+    <parent link="${tethernum}_min_link51"/>
+    <child link="${tethernum}_base_link51"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint52_1" type="continuous">
+    <parent link="${tethernum}_base_link51"/>
+    <child link="${tethernum}_min_link52"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint52_2" type="continuous">
+    <parent link="${tethernum}_min_link52"/>
+    <child link="${tethernum}_base_link52"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint53_1" type="continuous">
+    <parent link="${tethernum}_base_link52"/>
+    <child link="${tethernum}_min_link53"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint53_2" type="continuous">
+    <parent link="${tethernum}_min_link53"/>
+    <child link="${tethernum}_base_link53"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint54_1" type="continuous">
+    <parent link="${tethernum}_base_link53"/>
+    <child link="${tethernum}_min_link54"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint54_2" type="continuous">
+    <parent link="${tethernum}_min_link54"/>
+    <child link="${tethernum}_base_link54"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint55_1" type="continuous">
+    <parent link="${tethernum}_base_link54"/>
+    <child link="${tethernum}_min_link55"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint55_2" type="continuous">
+    <parent link="${tethernum}_min_link55"/>
+    <child link="${tethernum}_base_link55"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint56_1" type="continuous">
+    <parent link="${tethernum}_base_link55"/>
+    <child link="${tethernum}_min_link56"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint56_2" type="continuous">
+    <parent link="${tethernum}_min_link56"/>
+    <child link="${tethernum}_base_link56"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint57_1" type="continuous">
+    <parent link="${tethernum}_base_link56"/>
+    <child link="${tethernum}_min_link57"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint57_2" type="continuous">
+    <parent link="${tethernum}_min_link57"/>
+    <child link="${tethernum}_base_link57"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint58_1" type="continuous">
+    <parent link="${tethernum}_base_link57"/>
+    <child link="${tethernum}_min_link58"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint58_2" type="continuous">
+    <parent link="${tethernum}_min_link58"/>
+    <child link="${tethernum}_base_link58"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint59_1" type="continuous">
+    <parent link="${tethernum}_base_link58"/>
+    <child link="${tethernum}_min_link59"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint59_2" type="continuous">
+    <parent link="${tethernum}_min_link59"/>
+    <child link="${tethernum}_base_link59"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint60_1" type="continuous">
+    <parent link="${tethernum}_base_link59"/>
+    <child link="${tethernum}_min_link60"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint60_2" type="continuous">
+    <parent link="${tethernum}_min_link60"/>
+    <child link="${tethernum}_base_link60"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint61_1" type="continuous">
+    <parent link="${tethernum}_base_link60"/>
+    <child link="${tethernum}_min_link61"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint61_2" type="continuous">
+    <parent link="${tethernum}_min_link61"/>
+    <child link="${tethernum}_base_link61"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint62_1" type="continuous">
+    <parent link="${tethernum}_base_link61"/>
+    <child link="${tethernum}_min_link62"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint62_2" type="continuous">
+    <parent link="${tethernum}_min_link62"/>
+    <child link="${tethernum}_base_link62"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint63_1" type="continuous">
+    <parent link="${tethernum}_base_link62"/>
+    <child link="${tethernum}_min_link63"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint63_2" type="continuous">
+    <parent link="${tethernum}_min_link63"/>
+    <child link="${tethernum}_base_link63"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint64_1" type="continuous">
+    <parent link="${tethernum}_base_link63"/>
+    <child link="${tethernum}_min_link64"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint64_2" type="continuous">
+    <parent link="${tethernum}_min_link64"/>
+    <child link="${tethernum}_base_link64"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint65_1" type="continuous">
+    <parent link="${tethernum}_base_link64"/>
+    <child link="${tethernum}_min_link65"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint65_2" type="continuous">
+    <parent link="${tethernum}_min_link65"/>
+    <child link="${tethernum}_base_link65"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint66_1" type="continuous">
+    <parent link="${tethernum}_base_link65"/>
+    <child link="${tethernum}_min_link66"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint66_2" type="continuous">
+    <parent link="${tethernum}_min_link66"/>
+    <child link="${tethernum}_base_link66"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint67_1" type="continuous">
+    <parent link="${tethernum}_base_link66"/>
+    <child link="${tethernum}_min_link67"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint67_2" type="continuous">
+    <parent link="${tethernum}_min_link67"/>
+    <child link="${tethernum}_base_link67"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint68_1" type="continuous">
+    <parent link="${tethernum}_base_link67"/>
+    <child link="${tethernum}_min_link68"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint68_2" type="continuous">
+    <parent link="${tethernum}_min_link68"/>
+    <child link="${tethernum}_base_link68"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint69_1" type="continuous">
+    <parent link="${tethernum}_base_link68"/>
+    <child link="${tethernum}_min_link69"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint69_2" type="continuous">
+    <parent link="${tethernum}_min_link69"/>
+    <child link="${tethernum}_base_link69"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint70_1" type="continuous">
+    <parent link="${tethernum}_base_link69"/>
+    <child link="${tethernum}_min_link70"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint70_2" type="continuous">
+    <parent link="${tethernum}_min_link70"/>
+    <child link="${tethernum}_base_link70"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint71_1" type="continuous">
+    <parent link="${tethernum}_base_link70"/>
+    <child link="${tethernum}_min_link71"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint71_2" type="continuous">
+    <parent link="${tethernum}_min_link71"/>
+    <child link="${tethernum}_base_link71"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint72_1" type="continuous">
+    <parent link="${tethernum}_base_link71"/>
+    <child link="${tethernum}_min_link72"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint72_2" type="continuous">
+    <parent link="${tethernum}_min_link72"/>
+    <child link="${tethernum}_base_link72"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint73_1" type="continuous">
+    <parent link="${tethernum}_base_link72"/>
+    <child link="${tethernum}_min_link73"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint73_2" type="continuous">
+    <parent link="${tethernum}_min_link73"/>
+    <child link="${tethernum}_base_link73"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint74_1" type="continuous">
+    <parent link="${tethernum}_base_link73"/>
+    <child link="${tethernum}_min_link74"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint74_2" type="continuous">
+    <parent link="${tethernum}_min_link74"/>
+    <child link="${tethernum}_base_link74"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint75_1" type="continuous">
+    <parent link="${tethernum}_base_link74"/>
+    <child link="${tethernum}_min_link75"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint75_2" type="continuous">
+    <parent link="${tethernum}_min_link75"/>
+    <child link="${tethernum}_base_link75"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint76_1" type="continuous">
+    <parent link="${tethernum}_base_link75"/>
+    <child link="${tethernum}_min_link76"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint76_2" type="continuous">
+    <parent link="${tethernum}_min_link76"/>
+    <child link="${tethernum}_base_link76"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint77_1" type="continuous">
+    <parent link="${tethernum}_base_link76"/>
+    <child link="${tethernum}_min_link77"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint77_2" type="continuous">
+    <parent link="${tethernum}_min_link77"/>
+    <child link="${tethernum}_base_link77"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint78_1" type="continuous">
+    <parent link="${tethernum}_base_link77"/>
+    <child link="${tethernum}_min_link78"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint78_2" type="continuous">
+    <parent link="${tethernum}_min_link78"/>
+    <child link="${tethernum}_base_link78"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint79_1" type="continuous">
+    <parent link="${tethernum}_base_link78"/>
+    <child link="${tethernum}_min_link79"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint79_2" type="continuous">
+    <parent link="${tethernum}_min_link79"/>
+    <child link="${tethernum}_base_link79"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint80_1" type="continuous">
+    <parent link="${tethernum}_base_link79"/>
+    <child link="${tethernum}_min_link80"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint80_2" type="continuous">
+    <parent link="${tethernum}_min_link80"/>
+    <child link="${tethernum}_base_link80"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint81_1" type="continuous">
+    <parent link="${tethernum}_base_link80"/>
+    <child link="${tethernum}_min_link81"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint81_2" type="continuous">
+    <parent link="${tethernum}_min_link81"/>
+    <child link="${tethernum}_base_link81"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint82_1" type="continuous">
+    <parent link="${tethernum}_base_link81"/>
+    <child link="${tethernum}_min_link82"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint82_2" type="continuous">
+    <parent link="${tethernum}_min_link82"/>
+    <child link="${tethernum}_base_link82"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint83_1" type="continuous">
+    <parent link="${tethernum}_base_link82"/>
+    <child link="${tethernum}_min_link83"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint83_2" type="continuous">
+    <parent link="${tethernum}_min_link83"/>
+    <child link="${tethernum}_base_link83"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint84_1" type="continuous">
+    <parent link="${tethernum}_base_link83"/>
+    <child link="${tethernum}_min_link84"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint84_2" type="continuous">
+    <parent link="${tethernum}_min_link84"/>
+    <child link="${tethernum}_base_link84"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint85_1" type="continuous">
+    <parent link="${tethernum}_base_link84"/>
+    <child link="${tethernum}_min_link85"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint85_2" type="continuous">
+    <parent link="${tethernum}_min_link85"/>
+    <child link="${tethernum}_base_link85"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint86_1" type="continuous">
+    <parent link="${tethernum}_base_link85"/>
+    <child link="${tethernum}_min_link86"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint86_2" type="continuous">
+    <parent link="${tethernum}_min_link86"/>
+    <child link="${tethernum}_base_link86"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint87_1" type="continuous">
+    <parent link="${tethernum}_base_link86"/>
+    <child link="${tethernum}_min_link87"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint87_2" type="continuous">
+    <parent link="${tethernum}_min_link87"/>
+    <child link="${tethernum}_base_link87"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint88_1" type="continuous">
+    <parent link="${tethernum}_base_link87"/>
+    <child link="${tethernum}_min_link88"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint88_2" type="continuous">
+    <parent link="${tethernum}_min_link88"/>
+    <child link="${tethernum}_base_link88"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint89_1" type="continuous">
+    <parent link="${tethernum}_base_link88"/>
+    <child link="${tethernum}_min_link89"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint89_2" type="continuous">
+    <parent link="${tethernum}_min_link89"/>
+    <child link="${tethernum}_base_link89"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint90_1" type="continuous">
+    <parent link="${tethernum}_base_link89"/>
+    <child link="${tethernum}_min_link90"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint90_2" type="continuous">
+    <parent link="${tethernum}_min_link90"/>
+    <child link="${tethernum}_base_link90"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint91_1" type="continuous">
+    <parent link="${tethernum}_base_link90"/>
+    <child link="${tethernum}_min_link91"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint91_2" type="continuous">
+    <parent link="${tethernum}_min_link91"/>
+    <child link="${tethernum}_base_link91"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint92_1" type="continuous">
+    <parent link="${tethernum}_base_link91"/>
+    <child link="${tethernum}_min_link92"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint92_2" type="continuous">
+    <parent link="${tethernum}_min_link92"/>
+    <child link="${tethernum}_base_link92"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint93_1" type="continuous">
+    <parent link="${tethernum}_base_link92"/>
+    <child link="${tethernum}_min_link93"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint93_2" type="continuous">
+    <parent link="${tethernum}_min_link93"/>
+    <child link="${tethernum}_base_link93"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint94_1" type="continuous">
+    <parent link="${tethernum}_base_link93"/>
+    <child link="${tethernum}_min_link94"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint94_2" type="continuous">
+    <parent link="${tethernum}_min_link94"/>
+    <child link="${tethernum}_base_link94"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint95_1" type="continuous">
+    <parent link="${tethernum}_base_link94"/>
+    <child link="${tethernum}_min_link95"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint95_2" type="continuous">
+    <parent link="${tethernum}_min_link95"/>
+    <child link="${tethernum}_base_link95"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint96_1" type="continuous">
+    <parent link="${tethernum}_base_link95"/>
+    <child link="${tethernum}_min_link96"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint96_2" type="continuous">
+    <parent link="${tethernum}_min_link96"/>
+    <child link="${tethernum}_base_link96"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint97_1" type="continuous">
+    <parent link="${tethernum}_base_link96"/>
+    <child link="${tethernum}_min_link97"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint97_2" type="continuous">
+    <parent link="${tethernum}_min_link97"/>
+    <child link="${tethernum}_base_link97"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint98_1" type="continuous">
+    <parent link="${tethernum}_base_link97"/>
+    <child link="${tethernum}_min_link98"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint98_2" type="continuous">
+    <parent link="${tethernum}_min_link98"/>
+    <child link="${tethernum}_base_link98"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint99_1" type="continuous">
+    <parent link="${tethernum}_base_link98"/>
+    <child link="${tethernum}_min_link99"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint99_2" type="continuous">
+    <parent link="${tethernum}_min_link99"/>
+    <child link="${tethernum}_base_link99"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+<joint name="${tethernum}_joint100_1" type="continuous">
+    <parent link="${tethernum}_base_link99"/>
+    <child link="${tethernum}_min_link100"/>
+    <axis xyz="0 1 0" />
+    <origin xyz="${-tether_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+<joint name="${tethernum}_joint100_2" type="continuous">
+    <parent link="${tethernum}_min_link100"/>
+    <child link="${tethernum}_base_link100"/>
+    <axis xyz="0 0 1" />
+    <origin xyz="${-min_length} 0 0" rpy="0 0 0" />
+    <joint_properties damping="0" friction="0"/>
+</joint>
+
+
+
+
+
+<!-- =========gazebo reference============ -->
+
+<!--
+<gazebo reference="${tethernum}_link1">
+<mu1 value="1.0"/>
+<mu2 value="1.0"/>
+<kp  value="10000000.0" />
+<kd  value="1.0" />
+<fdir1 value="1 0 0"/>
+<material>Gazebo/White</material>
+<turnGravityOff>false</turnGravityOff>
+</gazebo>-->
+
+
+<!-- Transmission is important to link the joints and the controller -->
+<!--
+<transmission name="${fb}_${lr}_wheel_joint_trans">
+<type>transmission_interface/SimpleTransmission</type>
+<joint name="${fb}_${lr}_wheel_joint">
+<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+</joint>
+<actuator name="${fb}_${lr}_wheel_joint_motor">
+<mechanicalReduction>1</mechanicalReduction>
+</actuator>
+</transmission> -->
+
+</xacro:macro>
+</robot>
+

@@ -1,0 +1,119 @@
+<?xml version='1.0'?>
+<sdf version="1.4">
+<model name="tether">
+<link name="connect1">
+
+
+
+   <pose>0 0 0.0011 0 0 0</pose>
+      <inertial>
+        <mass>0.00001</mass>
+        <inertia>
+          <ixx>0.0</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>0.0</iyy>
+          <iyz>0.0</iyz>
+          <izz>0.0</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <box>
+            <size>0.001 0.006 0.002</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.001 0.006 0.002</size>
+          </box>
+        </geometry>
+      </visual>
+    </link>
+
+
+
+<link name="connect2">
+
+
+
+   <pose>-0.0016 0.00005 0.0005 0 0 0</pose>
+      <inertial>
+        <mass>0.00001</mass>
+        <inertia>
+          <ixx>0.0</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>0.0</iyy>
+          <iyz>0.0</iyz>
+          <izz>0.0</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <box>
+            <size>0.0021 0.0019 0.0006</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.0021 0.0019 0.0006</size>
+          </box>
+        </geometry>
+      </visual>
+    </link>
+
+
+<link name="connect3">
+
+
+   <pose>-0.00315 0 0.0011 0 0 0</pose>
+      <inertial>
+        <mass>0.00001</mass>
+        <inertia>
+          <ixx>0.0</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>0.0</iyy>
+          <iyz>0.0</iyz>
+          <izz>0.0</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <box>
+            <size>0.001 0.006 0.002</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.001 0.006 0.002</size>
+          </box>
+        </geometry>
+      </visual>
+    </link>
+
+
+
+    <joint name='connect1_joint' type='fixed'>
+      <parent>connect1</parent>
+      <child>connect2</child>
+      <pose>0.00105 0 0 0 0 0</pose>
+    </joint>
+
+
+    <joint name='connect2_joint' type='fixed'>
+      <parent>connect2</parent>
+      <child>connect3</child>
+      <pose>0.0005 0 -0.00025 0 0 0</pose>
+    </joint>
+
+
+  </model>
+</sdf>
