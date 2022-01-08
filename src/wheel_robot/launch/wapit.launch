@@ -1,0 +1,33 @@
+<launch> 
+
+  <arg name="paused" default="false"/>
+  <arg name="debug" default="false"/>
+  <arg name="gui" default="true"/>
+    
+ <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="worlds/empty.world" />
+    <arg name="paused" value="$(arg paused)" />
+    <arg name="debug" value="$(arg debug)" />
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="use_sim_time" value="true" />
+    <arg name="headless" value="false" />
+  </include>
+
+<param name="robot_description" command="$(find xacro)/xacro.py $(find robot_pkg)/urdf/wapit.urdf.xacro"/>
+
+  <!-- Setting gui parameter to true for display joint slider -->
+  <param name="use_gui" value="true"/>
+  <!-- Starting Joint state publisher node which will publish the joint values -->
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+  <!-- Starting robot state publish which will publish tf -->
+
+<!-- <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-x 0.0 -y 0.0 -z 0.0 -param robot_description -urdf -model wapit" output="screen"/> -->
+
+  <node name="wheel_robot_spawn" pkg="gazebo_ros" type="spawn_model" output="screen" 
+    args="-urdf -param robot_description -model wheel_robot" />
+
+ <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" >
+  <param name="publish_frequency" type="double" value="500.0" />
+ </node>
+</launch>
+
